@@ -11,14 +11,30 @@ next player's turn
 */
 
 // set variables
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer;
 
 scores = [0, 0];
 roundScore = 0;
 activePlayer = 0;
 
-dice = Math.floor(Math.random() * 6) + 1;
-console.log(dice);
 
-// get the element of the selected class
-document.querySelector('#current-' + activePlayer).textContent = dice;
+// get the element of the selected class and set display to none
+document.querySelector('.dice').style.display = 'none';
+
+//get elements by Id, set text content to zero
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+// get the element of the selected class and listen for click event
+document.querySelector('.btn-roll').addEventListener('click', function () {
+   // get a random number
+   dice = Math.floor(Math.random() * 6) + 1;
+   // display the result
+   var diceDOM = document.querySelector('.dice')
+   diceDOM.style.display = 'block';
+   diceDOM.src = 'dice-' + dice + '.png';
+
+   // update the round score IF the rolled number was NOT a 1
+});
