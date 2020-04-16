@@ -73,7 +73,7 @@ function nextPlayer() {
 // reset game parameters
 document.querySelector('.btn-new').addEventListener('click', init);
 
-// initialise game parameters
+// initialize game parameters
 function init() {
    scores = [0, 0];
    roundScore = 0;
@@ -82,9 +82,19 @@ function init() {
    // get the element of the selected class and set display to none
    document.querySelector('.dice').style.display = 'none';
 
-   // get elements by Id, set text content to zero
+   // get elements by id, set text content to zero
    document.getElementById('score-0').textContent = '0';
    document.getElementById('score-1').textContent = '0';
    document.getElementById('current-0').textContent = '0';
    document.getElementById('current-1').textContent = '0';
+   // get elements by id, set text content to player names
+   document.getElementById('name-0').textContent = 'Player 1';
+   document.getElementById('name-1').textContent = 'Player 2';
+   // get elements by id and remove class
+   document.querySelector('.player-0-panel').classList.remove('winner');
+   document.querySelector('.player-1-panel').classList.remove('winner');
+   document.querySelector('.player-0-panel').classList.remove('active');
+   document.querySelector('.player-0-panel').classList.remove('active');
+   document.querySelector('.player-0-panel').classList.add('active');
+
 };
