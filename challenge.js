@@ -21,29 +21,42 @@ var lastDice;
 // get the element of the selected class and listen for click event
 document.querySelector('.btn-roll').addEventListener('click', function () {
    if (gamePlaying) {
-      // get a random number
-      dice = Math.floor(Math.random() * 6) + 1;
-      // display the result
-      var diceDOM = document.querySelector('.dice')
-      diceDOM.style.display = 'block';
-      diceDOM.src = 'dice-' + dice + '.png';
+      // 1. Random number
+      var dice1 = Math.floor(Math.random() * 6) + 1;
+      var dice2 = Math.floor(Math.random() * 6) + 1;
 
-      if (dice === 6 && lastDice === 6) {
-         //Player looses score
-         scores[activePlayer] = 0;
-         document.querySelector('#score-' + activePlayer).textContent = '0';
-         nextPlayer();
-      } // update the round score IF the rolled number was NOT a 1
-      else if (dice !== 1) {
+      //2. Display the result
+      document.getElementById('dice-1').style.display = 'block';
+      document.getElementById('dice-2').style.display = 'block';
+      document.getElementById('dice-1').src = 'dice-' + dice1 + '.png';
+      document.getElementById('dice-2').src = 'dice-' + dice2 + '.png';
+
+      // if (dice === 6 && lastDice === 6) {
+      //    //Player looses score
+      //    scores[activePlayer] = 0;
+      //    document.querySelector('#score-' + activePlayer).textContent = '0';
+      //    nextPlayer();
+      // } // update the round score IF the rolled number was NOT a 1
+      // else if (dice !== 1) {
+      //    //add the score
+      //    roundScore += dice;
+      //    document.querySelector('#current-' + activePlayer).textContent = roundScore;
+      // } else {
+      //    //go to next player
+      //    nextPlayer();
+      // }
+      // // set to the value of the current dice value, which will be stored as the previous dice value when the function runs again
+      // lastDice = dice;
+
+      // update the round score IF the rolled number was NOT a 1
+      if (dice1 !== 1 && dice2 !== 1) {
          //add the score
-         roundScore += dice;
+         roundScore += dice1 + dice2;
          document.querySelector('#current-' + activePlayer).textContent = roundScore;
       } else {
          //go to next player
          nextPlayer();
       }
-      // set to the value of the current dice value, which will be stored as the previous dice value when the function runs again
-      lastDice = dice;
    }
 
 });
@@ -71,7 +84,8 @@ document.querySelector('.btn-hold').addEventListener('click', function () {
       // check if player won the game
       if (scores[activePlayer] >= winningScore) {
          document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-         document.querySelector('.dice').style.display = 'none';
+         document.getElementById('dice-1').style.display = 'none';
+         document.getElementById('dice-2').style.display = 'none';
          document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
          document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
          gamePlaying = false;
@@ -96,7 +110,8 @@ function nextPlayer() {
    document.querySelector('.player-1-panel').classList.toggle('active')
 
    // reset dice display style
-   document.querySelector('.dice').style.display = 'none';
+   document.getElementById('dice-1').style.display = 'none';
+   document.getElementById('dice-2').style.display = 'none';
 }
 
 // reset game parameters
@@ -110,7 +125,8 @@ function init() {
    gamePlaying = true;
 
    // get the element of the selected class and set display to none
-   document.querySelector('.dice').style.display = 'none';
+   document.getElementById('dice-1').style.display = 'none';
+   document.getElementById('dice-2').style.display = 'none';
 
    // get elements by id, set text content to zero
    document.getElementById('score-0').textContent = '0';
